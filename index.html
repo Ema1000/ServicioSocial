@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal de Servicio Social del Instituto Tecnológico Superior de Santiago Tuxtla. Acceso para estudiantes, coordinadores y administradores.">
+    <meta name="keywords" content="ITSSAT, servicio social, Santiago Tuxtla, estudiantes, coordinadores">
+    <meta property="og:title" content="ITSSAT - Portal de Servicio Social">
+    <meta property="og:description" content="Sistema de gestión de servicio social para estudiantes del ITSSAT">
+    <meta property="og:type" content="website">
+    <title>ITSSAT - Portal de Servicio Social</title>
+    <!-- Icono de la pestaña -->
+    <link rel="icon" type="image/png" href="tec.png">
+    <link rel="stylesheet" href="style_componentes.css?v=<?php echo time(); ?>">
+    <style>
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            scroll-behavior: smooth;
+        }
+        
+        .header-index {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            width: 70px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #16a34a;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            margin-top: 50px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-weight: 400;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            color: white;
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #15803d;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            text-align: center;
+            color: #718096;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .about {
+            background: #f0fdf4;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            color: #15803d;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #22c55e;
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 24px;
+        }
+
+        .feature-icon::before {
+            content: attr(aria-label);
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .requirements {
+            background: white;
+        }
+
+        .req-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .req-card {
+            background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .req-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .req-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .req-number {
+            font-size: 2rem;
+            font-weight: 800;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .req-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .req-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .login-section {
+            background: #f0fdf4;
+            padding: 6rem 0;
+        }
+
+        .login-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .login-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+        }
+
+        .login-card:focus {
+            outline: 2px solid #22c55e;
+            outline-offset: 2px;
+        }
+
+        .login-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .login-card h3 {
+            font-size: 1.5rem;
+            color: #15803d;
+            margin-bottom: 1rem;
+        }
+
+        .login-card p {
+            color: #718096;
+            margin-bottom: 2rem;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
+        }
+
+        .login-btn:focus {
+            outline: 2px solid #22c55e;
+            outline-offset: 2px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: #22c55e;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #16a34a;
+            transform: translateY(-3px);
+        }
+
+        .footer {
+            background: #15803d;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-section p, 
+        .footer-section a {
+            color: #bbf7d0;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            line-height: 40px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #22c55e;
+            padding-top: 2rem;
+            text-align: center;
+            color: #bbf7d0;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .loading {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #22c55e;
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+    @media (max-width: 1024px) {
+        .nav {
+            padding: 0 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+        }
+
+        .about-content {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .about-features {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .req-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .login-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-content {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .nav {
+            padding: 0 1rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+        }
+
+        .nav-links {
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .hero {
+            min-height: 80vh;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .container {
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+        }
+
+        .about-features {
+            grid-template-columns: 1fr;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+        }
+
+        .req-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .req-card {
+            padding: 2rem;
+        }
+
+        .login-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .login-card {
+            padding: 2rem;
+        }
+
+        .footer-content {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            row-gap: 2rem;
+        }
+
+        .footer-section {
+            max-width: 100%;
+        }
+
+        .footer-section h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            max-width: 95%;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            font-size: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            justify-content: flex-start;
+            max-width: 90%;
+        }
+
+        .social-link {
+            width: 38px;
+            height: 33px;
+            font-size: 14px;
+            padding: 0.3rem;
+        }
+
+        .back-to-top {
+            bottom: 1rem;
+            right: 1rem;
+            width: 45px;
+            height: 45px;
+            font-size: 1.25rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .nav {
+            padding: 0 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 59px;
+            font-size: 15px;
+        }
+
+        .nav-links {
+            gap: 2rem;
+            font-size: 0.85rem;
+        }
+
+        .hero {
+            min-height: 70vh;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-text h3 {
+            font-size: 1.25rem;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+        }
+
+        .feature-card {
+            padding: 1.25rem;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+        }
+
+        .req-card {
+            padding: 1.5rem;
+        }
+
+        .req-number {
+            font-size: 1.5rem;
+        }
+
+        .req-card h3 {
+            font-size: 1.1rem;
+        }
+
+        .login-card {
+            padding: 1.5rem;
+        }
+
+        .login-icon {
+            width: 70px;
+            height: 70px;
+            font-size: 28px;
+        }
+
+        .login-card h3 {
+            font-size: 1.25rem;
+        }
+
+        .login-btn {
+            padding: 0.875rem 1.5rem;
+        }
+
+        .footer {
+            padding: 2rem 0 1rem;
+        }
+
+        .footer-content {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            row-gap: 1rem;
+        }
+
+        .footer-section {
+            max-width: 100%;
+        }
+
+        .footer-section h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            max-width: 100%;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            font-size: 0.68rem;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            justify-content: flex-start;
+            max-width: 100%;
+        }
+
+        .social-link {
+            width: 30px;
+            height: 30px;
+            font-size: 10px;
+            padding: 0.3rem;
+        }
+
+        .back-to-top {
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .nav-links {
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .hero h1 {
+            font-size: 1.75rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+        }
+
+        .feature-card h4,
+        .req-card h3,
+        .login-card h3 {
+            font-size: 1rem;
+        }
+
+        .footer-content {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            row-gap: 0.8rem;
+        }
+
+        .footer-section h4 {
+            font-size: 0.85rem;
+            max-width: 95%;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            font-size: 0.65rem;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            justify-content: flex-start;
+            max-width: 90%;
+        }
+
+        .social-link {
+            width: 32px;
+            height: 28px;
+            font-size: 9px;
+            padding: 0.25rem;
+        }
+    }
+    </style>
+</head>
+<body>
+<!-- ===== PRELOADER ===== -->
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+
+<!-- ===== HEADER / NAVBAR ===== -->
+    <header class="header-index">
+        <nav class="nav" role="navigation" aria-label="Navegación principal">
+            <img src="Itssat.png" class="logo" alt="Logo del Instituto Tecnológico Superior de Santiago Tuxtla">
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#requisitos">Servicio Social</a></li>
+                <li><a href="#acceso">Acceso</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<!-- ===== HERO / PORTADA ===== -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1><br>Servicio Social</h1>
+            <p class="hero-subtitle">
+                El servicio social es una oportunidad para aplicar tus conocimientos, desarrollar habilidades y 
+                contribuir activamente a la comunidad. ¡Conoce más sobre cómo puedes participar!
+            </p>
+        </div>
+        <div class="scroll-indicator" aria-hidden="true"></div>
+    </section>
+
+<!-- ===== INFORMACIÓN SERVICIO SOCIAL ===== -->
+    <main id="main-content">
+        <section id="servicio" class="about">
+            <div class="container">
+                <h2 class="section-title fade-in">¿Qué es el Servicio Social?</h2>
+                <p class="section-subtitle fade-in">
+                    Una experiencia transformadora que conecta tu formación académica con el impacto social
+                </p>
+                <div class="about-content">
+                    <div class="about-text fade-in">
+                        <h3>Compromiso con la Comunidad</h3>
+                        <p>
+                            El servicio social en el ITSSAT es más que un requisito académico. Es tu oportunidad 
+                            de aplicar los conocimientos adquiridos durante tu formación profesional en beneficio 
+                            de la sociedad.
+                        </p>
+                        <p>
+                            A través de proyectos innovadores y colaboraciones estratégicas, podrás desarrollar 
+                            habilidades profesionales mientras contribuyes al desarrollo de tu comunidad.
+                        </p>
+                    </div>
+                    <div class="about-features fade-in">
+                        <div class="feature-card">
+                            <div class="feature-icon" role="img" aria-label="Experiencia práctica">💼</div>
+                            <h4>Experiencia Práctica</h4>
+                            <p>Aplica tus conocimientos en proyectos reales</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon" role="img" aria-label="Impacto social">👨‍👨‍👧‍👦</div>
+                            <h4>Impacto Social</h4>
+                            <p>Contribuye al desarrollo de tu comunidad</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon" role="img" aria-label="Crecimiento profesional">🎓</div>
+                            <h4>Crecimiento Profesional</h4>
+                            <p>Desarrolla habilidades y competencias</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon" role="img" aria-label="Instituciones">🏦</div>
+                            <h4>Instituciones</h4>
+                            <p>Conecta con profesionales y organizaciones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- ===== REQUISITOS ===== -->
+        <section id="requisitos" class="requirements">
+            <div class="container">
+                <h2 class="section-title fade-in">Requisitos de Servicio Social</h2>
+                <p class="section-subtitle fade-in">
+                    Conoce los pasos y documentos necesarios para iniciar tu servicio social
+                </p>
+                <div class="req-grid">
+                    <div class="req-card fade-in">
+                        <div class="req-number">01</div>
+                        <h3>Requisitos Académicos</h3>
+                        <p>Tener 60% de los créditos del plan de estudios y estar inscrito en el semestre correspondiente.</p>
+                    </div>
+                    <div class="req-card fade-in">
+                        <div class="req-number">02</div>
+                        <h3>Documentación</h3>
+                        <p>Carta de presentación, carta de aceptación, solicitud de servicio social, carta compromiso y plan de trabajo.</p>
+                    </div>
+                    <div class="req-card fade-in">
+                        <div class="req-number">03</div>
+                        <h3>Duración y Horas</h3>
+                        <p>Completar 500 horas distribuidas en un período no menor a 6 meses ni mayor a 2 años.</p>
+                    </div>
+                    <div class="req-card fade-in">
+                        <div class="req-number">04</div>
+                        <h3>Evaluación</h3>
+                        <p>Presentar reportes bimestrales, evaluación del responsable del programa, reporte final.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- ===== ACCESO AL SISTEMA ===== -->
+        <section id="acceso" class="login-section">
+            <div class="container">
+                <h2 class="section-title fade-in">Acceso al Sistema</h2>
+                <p class="section-subtitle fade-in">
+                    Selecciona tu perfil para acceder al portal correspondiente
+                </p>
+                <div class="login-grid">
+                    <div class="login-card fade-in" tabindex="0" role="button" data-url="Administrador_Login.php" aria-label="Acceder como Administrador">
+                        <div class="login-icon" role="img" aria-label="Icono de administrador">👨‍💼</div>
+                        <h3>Administrador</h3>
+                        <p>Control de los datos, gestiona el personal del servicio, exportacion de la base de datos.</p>
+                        <button class="login-btn">Acceder</button>
+                    </div>
+                    <div class="login-card fade-in" tabindex="0" role="button" data-url="ServicioSocial_Login.php" aria-label="Acceder como Coordinador">
+                        <div class="login-icon" role="img" aria-label="Icono de coordinador">🏢</div>
+                        <h3>Servicio Social</h3>
+                        <p>Gestiona los estudiantes, registro de horas, mensajeria, reportes y graficas del servicio.</p>
+                        <button class="login-btn">Acceder</button>
+                    </div>
+                    <div class="login-card fade-in" tabindex="0" role="button" data-url="Estudiante_Login.php" aria-label="Acceder como Estudiante">
+                        <div class="login-icon" role="img" aria-label="Icono de estudiante">🎓</div>
+                        <h3>Estudiante</h3>
+                        <p>Registro de datos, seguimiento de horas, mensajeria, generación de reportes.</p>
+                        <button class="login-btn">Acceder</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<!-- ===== BOTÓN VOLVER ARRIBA ===== -->
+    <button class="back-to-top" aria-label="Volver arriba">↑</button>
+
+<!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Instituto Tecnológico Superior de San Andrés Tuxtla</h4>
+                    <p>Formando profesionales comprometidos con el desarrollo Tecnológico y social de México.</p>
+                    <p>Carretera Costera del Golfo S/N, Km.140 +</p>
+                    <p>San Andrés Tuxtla, Veracruz, México</p>
+                </div>
+                
+                <div class="footer-section">
+                <h4>Contacto</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/itssat" class="contact-item" target="_blank" rel="noopener noreferrer">
+                        <span class="social-link">📘</span>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="mailto:serviciosocial@itssat.edu.mx" class="contact-item">
+                        <span class="social-link">📧</span>
+                        <span>serviciosocial@itssat.edu.mx</span>
+                    </a>
+                    <a href="tel:+522941234567" class="contact-item">
+                        <span class="social-link">📞</span>
+                        <span>+52 (294) 947-9100</span>
+                    </a>
+                    <a href="https://www.itssat.edu.mx" class="contact-item" target="_blank" rel="noopener noreferrer">
+                        <span class="social-link">🌐</span>
+                        <span>itssat.edu.mx</span>
+                    </a>
+                </div>
+            </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#servicio">Servicio Social</a>
+                    <a href="#requisitos">Requisitos</a>
+                    <a href="#acceso">Acceso</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Horarios de Atención</h4>
+                    <p>Lunes a Viernes</p>
+                    <p>8:00 AM - 3:00 PM</p>
+                    <p>Departamento de Servicio Social</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Instituto Tecnológico Superior de Santiago Tuxtla | Todos los derechos reservados</p>
+                <p>Desarrollado para ITSSAT - Portal de Servicio Social</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        /* ===== PRELOADER ===== */
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if(preloader){
+                preloader.classList.add('hidden');
+            }
+            document.body.classList.remove('loading');
+        });
+    </script>
+
+    <script>
+/* ===== SCROLL SUAVE ===== */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute('href'));
+
+        if (target) {
+            const headerOffset = 100;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+
+/* ===== ANIMACIÓN AL APARECER ===== */
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+});
+
+
+/* ===== EFECTO HEADER AL SCROLL ===== */
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+
+    if (header) {
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+            header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.boxShadow = 'none';
+        }
+    }
+});
+
+
+/* ===== BOTÓN VOLVER ARRIBA ===== */
+const backToTopBtn = document.querySelector('.back-to-top');
+
+if(backToTopBtn){
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+
+/* ===== LOGIN CARDS ===== */
+const loginCards = document.querySelectorAll('.login-card');
+
+loginCards.forEach(card => {
+
+    card.addEventListener('click', function() {
+        const url = this.getAttribute('data-url');
+        if (url) {
+            window.location.href = url;
+        }
+    });
+
+    card.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const url = this.getAttribute('data-url');
+            if (url) {
+                window.location.href = url;
+            }
+        }
+    });
+
+});
+</script>
+</body>
+</html>
