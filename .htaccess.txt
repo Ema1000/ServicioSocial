@@ -1,0 +1,38 @@
+# Cabeceras de seguridad
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://cdn.jsdelivr.net; connect-src 'self';"
+
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+# Proteger archivos sensibles
+<FilesMatch "\.(env|log|sql|bak|git|ini|sh)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Evitar listar directorios
+Options -Indexes
+
+<FilesMatch "^(config|db|database|conexion|conn)\.(php|inc)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Forzar HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Cache de assets estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
