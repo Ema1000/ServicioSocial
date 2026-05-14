@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <title>Acceso · ITSSAT</title>
+    <link rel="icon" type="image/png" href="tec.png">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style_componentes.css">
+    <link rel="stylesheet" href="style_login.css">
+    <link rel="stylesheet" href="style_animaciones.css">
+</head>
+<body>
+
+<!-- PRELOADER -->
+    <div class="preloader" id="preloader" aria-hidden="true" role="status">
+        <div class="loader"></div>
+    </div>
+
+<!-- PANEL BIENVENIDA -->
+    <div class="container-bienvenido">
+        <img src="Itssat.png"
+             class="logo"
+             alt="Logo del Instituto Tecnológico Superior de Santiago Tuxtla"
+             width="120" height="130">
+        <div class="bienvenida">
+            <h1 id="tituloRol">Bienvenido</h1>
+            <p id="subtituloRol"></p>
+        </div>
+    </div>
+
+<!-- PANEL FORMULARIOS -->
+    <div class="container-derecho">
+        <div class="form-container">
+
+            <!-- FORMULARIO 1: LOGIN -->
+            <div id="loginForm" class="form-section active" role="region" aria-label="Iniciar sesión">
+                <div class="form-header">
+                    <div class="icon-header" aria-hidden="true"><i class="fas fa-circle-user"></i></div>
+                    <h2>Iniciar Sesión</h2>
+                </div>
+                <div id="loginForm" class="form-section active">
+                <form id="formLogin" novalidate autocomplete="on">
+                    <div class="form-group">
+                        <label for="correo" class="sr-only">Correo electrónico</label>
+                        <span class="icon" aria-hidden="true">📧</span>
+                        <input type="email" id="correo" name="correo"
+                               placeholder="Correo Electrónico"
+                               autocomplete="username"
+                               maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="sr-only">Contraseña</label>
+                        <span class="icon" aria-hidden="true">🔑</span>
+                        <input type="password" id="password" name="password"
+                               placeholder="Contraseña"
+                               autocomplete="current-password"
+                               maxlength="20" required>
+                        <button type="button" class="toggle-password" id="togglePasswordBtn"
+                                aria-label="Mostrar u ocultar contraseña">👁️</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" id="loginBtn" class="btn-login btn-verde-login">Iniciar Sesión</button>
+                    </div>
+                    <div class="separador"></div>
+                    <div class="btn-group">
+                        <button type="button" class="btn-login btn-red-login" id="irRecuperacionBtn">¿Olvidé mi Contraseña?</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+
+            <!-- FORMULARIO 2: RECUPERACIÓN PASO 1 -->
+            <div id="recoveryForm" class="form-section" role="region" aria-label="Recuperar contraseña">
+                <div class="form-header">
+                    <div class="icon-header" aria-hidden="true"><i class="fas fa-lock icon-spinning"></i></div>
+                    <h2>Recuperar Contraseña</h2>
+                </div>
+                <p class="recovery-subtitle">Ingresa tu correo para identificarte</p>
+                <form id="formRecuperar" novalidate>
+                    <div class="form-group">
+                        <label for="correo_recuperar" class="sr-only">Correo electrónico</label>
+                        <span class="icon" aria-hidden="true">📧</span>
+                        <input type="email" id="correo_recuperar" name="correo_recuperar"
+                               placeholder="Correo Electrónico"
+                               autocomplete="email"
+                               maxlength="100" required>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn-login btn-verde-login">Continuar</button>
+                    </div>
+                    <div class="separador"></div>
+                    <div class="btn-group">
+                        <button type="button" class="btn-login btn-red-login" id="irLoginBtn">Volver al Login</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- FORMULARIO 3: RECUPERACIÓN PASO 2 (desafío) -->
+            <div id="challengeForm" class="form-section" role="region" aria-label="Verificar identidad">
+                <div class="form-header">
+                    <div class="icon-header" aria-hidden="true"><i class="fas fa-shield-halved"></i></div>
+                    <h2>Verificar Identidad</h2>
+                </div>
+                <p class="recovery-subtitle">Ingresa tus credenciales secretas</p>
+                <form id="formDesafio" novalidate>
+                    <div class="form-group recovery-input-wrap">
+                        <label for="respuesta_0" class="sr-only">Clave secreta 1</label>
+                        <span class="icon" aria-hidden="true">🔑</span>
+                        <input type="password" name="respuestas[]" id="respuesta_0"
+                               placeholder="Clave secreta 1" autocomplete="off" maxlength="20" required>
+                        <button type="button" class="toggle-password"
+                                aria-label="Mostrar clave secreta 1" data-target="respuesta_0">👁️</button>
+                    </div>
+                    <div class="form-group recovery-input-wrap">
+                        <label for="respuesta_1" class="sr-only">Clave secreta 2</label>
+                        <span class="icon" aria-hidden="true">🔑</span>
+                        <input type="password" name="respuestas[]" id="respuesta_1"
+                               placeholder="Clave secreta 2" autocomplete="off" maxlength="20" required>
+                        <button type="button" class="toggle-password"
+                                aria-label="Mostrar clave secreta 2" data-target="respuesta_1">👁️</button>
+                    </div>
+                    <div class="form-group recovery-input-wrap">
+                        <label for="respuesta_2" class="sr-only">Clave secreta 3</label>
+                        <span class="icon" aria-hidden="true">🔑</span>
+                        <input type="password" name="respuestas[]" id="respuesta_2"
+                               placeholder="Clave secreta 3" autocomplete="off" maxlength="20" required>
+                        <button type="button" class="toggle-password"
+                                aria-label="Mostrar clave secreta 3" data-target="respuesta_2">👁️</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn-login btn-verde-login">Verificar</button>
+                    </div>
+                    <div class="separador"></div>
+                    <div class="btn-group">
+                        <button type="button" class="btn-login btn-red-login" id="cancelarDesafioBtn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- FORMULARIO 4: NUEVA CONTRASEÑA (paso 3) -->
+            <div id="resetPassForm" class="form-section" role="region" aria-label="Nueva contraseña">
+                <div class="form-header">
+                    <div class="icon-header" aria-hidden="true"><i class="fas fa-lock-open"></i></div>
+                    <h2>Nueva Contraseña</h2>
+                </div>
+                <form id="formNuevaPass" novalidate>
+                    <div class="form-group">
+                        <label for="nueva_password" class="sr-only">Nueva contraseña</label>
+                        <span class="icon" aria-hidden="true">🔒</span>
+                        <input type="password" id="nueva_password" name="nueva_password"
+                               placeholder="Nueva contraseña"
+                               autocomplete="new-password"
+                               maxlength="20" required>
+                        <button type="button" class="toggle-password" id="toggleNuevaBtn"
+                                aria-label="Mostrar nueva contraseña">👁️</button>
+                    </div>
+                    <div class="pass-strength"
+                         role="progressbar" aria-label="Fortaleza de contraseña"
+                         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="pass-strength-fill" id="passStrengthFill2"></div>
+                    </div>
+                    <span class="pass-hint" id="passStrengthLabel2" aria-live="polite">
+                        Escribe para ver la fortaleza
+                    </span>
+                    <div class="form-group">
+                        <label for="repetir_password" class="sr-only">Repite la contraseña</label>
+                        <span class="icon" aria-hidden="true">🔒</span>
+                        <input type="password" id="repetir_password" name="repetir_password"
+                               placeholder="Repite la contraseña"
+                               autocomplete="new-password"
+                               maxlength="20" required>
+                        <button type="button" class="toggle-password" id="toggleRepetirBtn"
+                                aria-label="Mostrar repetición de contraseña">👁️</button>
+                    </div>
+                    <p id="msg-pass" class="msg-pass msg-pass--hidden" aria-live="polite" role="alert"></p>
+                    <div class="btn-group">
+                        <button type="submit" id="btnGuardarPass" class="btn-login btn-verde-login" disabled>Confirmar</button>
+                    </div>
+                </form>
+                <div class="separador"></div>
+                <div class="btn-group">
+                    <button type="button" class="btn-login btn-red-login" id="cancelarResetBtn">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<!-- MODAL UNIVERSAL -->
+    <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true"
+         aria-labelledby="modalTitle" aria-describedby="modalText">
+        <div class="modal-content" id="modalContent">
+            <i   class="modal-icon"    id="modalIcon"    aria-hidden="true"></i>
+            <div class="modal-title"   id="modalTitle"   tabindex="-1"></div>
+            <div class="modal-text"    id="modalText"></div>
+            <div class="modal-actions" id="modalActions"></div>
+        </div>
+    </div>
+
+    <script src="componentes.js"></script>
+    <script src="login.js"></script>
+    <script>
+        /* ── CONFIGURACIÓN ── */
+        /* IMPORTANTE: cambia esta URL por la de tu Byet Host cuando la tengas */
+        var API_URL = 'https://serviciosocial.byethost11.com/api_login.php';
+
+        /* Detectar rol desde la URL: login.html?role=administrador */
+        var ROLES_INFO = {
+            administrador: { titulo: '¡Bienvenido Administrador!',  subtitulo: 'Accede con tu usuario para consultar y administrar la base de datos' },
+            personal:      { titulo: '¡Bienvenido Personal!',       subtitulo: 'Gestiona estudiantes, horas, reportes y más' },
+            estudiante:    { titulo: '¡Bienvenido Estudiante!',      subtitulo: 'Consulta tu avance, horas y reportes de servicio social' }
+        };
+
+        var params = new URLSearchParams(location.search);
+        var role   = params.get('role') || '';
+
+        if (!ROLES_INFO[role]) {
+            location.replace('index.html');
+        } else {
+            document.getElementById('tituloRol').textContent   = ROLES_INFO[role].titulo;
+            document.getElementById('subtituloRol').textContent = ROLES_INFO[role].subtitulo;
+        }
+
+        /* ── CSRF: obtener token del backend al cargar ── */
+        var csrfToken = '';
+        fetch(API_URL + '?accion=csrf&role=' + encodeURIComponent(role))
+            .then(function(r){ return r.json(); })
+            .then(function(d){ csrfToken = d.csrf_token || ''; })
+            .catch(function(){ csrfToken = ''; });
+
+        /* ── HELPERS ── */
+        function mostrarSolo(el) {
+            ['loginForm','recoveryForm','challengeForm','resetPassForm'].forEach(function(id){
+                var f = document.getElementById(id);
+                if (f) f.classList.remove('active');
+            });
+            if (el) {
+                el.classList.add('active');
+                var primer = el.querySelector('input, button');
+                if (primer) primer.focus();
+            }
+        }
+
+        function apiPost(data) {
+            data.role       = role;
+            data.csrf_token = csrfToken;
+            return fetch(API_URL, {
+                method:      'POST',
+                credentials: 'include',
+                headers:     { 'Content-Type': 'application/json' },
+                body:        JSON.stringify(data)
+            }).then(function(r){ return r.json(); });
+        }
+
+        /* ── INICIALIZACIÓN ── */
+        initPreloader();
+        initModal();
+        initLogin({
+            campoLogin:      'correo',
+            validarCorreo:   true,
+            campoRecuperar:  'correo_recuperar',
+            validarCorreoRec: true,
+            txtIniciando:    'Iniciando...',
+            txtRecuperando:  'Recuperando...'
+        });
+
+        /* Toggle contraseñas */
+        document.getElementById('togglePasswordBtn').addEventListener('click', function(){
+            togglePassword('password', this);
+        });
+        document.querySelectorAll('#challengeForm .toggle-password').forEach(function(btn){
+            btn.addEventListener('click', function(){ togglePassword(this.dataset.target, this); });
+        });
+        var tnb = document.getElementById('toggleNuevaBtn');
+        var trb = document.getElementById('toggleRepetirBtn');
+        if (tnb) tnb.addEventListener('click', function(){ togglePassword('nueva_password',   this); });
+        if (trb) trb.addEventListener('click', function(){ togglePassword('repetir_password', this); });
+
+        /* Navegación entre formularios */
+        document.getElementById('irRecuperacionBtn').addEventListener('click', function(){
+            mostrarSolo(document.getElementById('recoveryForm'));
+        });
+        document.getElementById('irLoginBtn').addEventListener('click', function(){
+            mostrarSolo(document.getElementById('loginForm'));
+        });
+        document.getElementById('cancelarDesafioBtn').addEventListener('click', function(){
+            apiPost({ accion: 'cancelar_restablecer' }).finally(function(){
+                mostrarSolo(document.getElementById('loginForm'));
+            });
+        });
+        document.getElementById('cancelarResetBtn').addEventListener('click', function(){
+            apiPost({ accion: 'cancelar_restablecer' }).finally(function(){
+                mostrarSolo(document.getElementById('loginForm'));
+            });
+        });
+
+        /* ── SUBMIT LOGIN ── */
+        document.getElementById('formLogin').addEventListener('submit', function(e){
+            e.preventDefault();
+            var correo   = document.getElementById('correo').value.trim();
+            var password = document.getElementById('password').value;
+            if (!correo || !password) { modalError('Error', 'Complete todos los campos'); return; }
+            var btn = this.querySelector('button[type="submit"]');
+            btn.disabled = true; btn.textContent = 'Iniciando...';
+
+            apiPost({ accion: 'login', correo: correo, password: password })
+                .then(function(d){
+                    if (d.ok) {
+                        location.href = d.redirect || 'menu.html';
+                    } else {
+                        modalError('Error', d.msg || 'Correo o contraseña incorrectos.');
+                        btn.disabled = false; btn.textContent = 'Iniciar Sesión';
+                    }
+                })
+                .catch(function(){
+                    modalError('Error', 'No se pudo conectar. Intente más tarde.');
+                    btn.disabled = false; btn.textContent = 'Iniciar Sesión';
+                });
+        });
+
+        /* ── SUBMIT RECUPERAR PASO 1 ── */
+        document.getElementById('formRecuperar').addEventListener('submit', function(e){
+            e.preventDefault();
+            var correo = document.getElementById('correo_recuperar').value.trim();
+            if (!correo) { modalError('Error', 'Ingrese su correo'); return; }
+            var btn = this.querySelector('button[type="submit"]');
+            btn.disabled = true; btn.textContent = 'Verificando...';
+
+            apiPost({ accion: 'recuperar_paso1', correo_recuperar: correo })
+                .then(function(d){
+                    if (d.ok) {
+                        mostrarSolo(document.getElementById('challengeForm'));
+                        modalWarning('Verifica tu identidad',
+                            'Escribe tus 3 respuestas en orden, tal como las registraste.');
+                    } else {
+                        modalError('Error', d.msg || 'No se pudo procesar.');
+                    }
+                    btn.disabled = false; btn.textContent = 'Continuar';
+                })
+                .catch(function(){
+                    modalError('Error', 'No se pudo conectar.');
+                    btn.disabled = false; btn.textContent = 'Continuar';
+                });
+        });
+
+        /* ── SUBMIT DESAFÍO PASO 2 ── */
+        document.getElementById('formDesafio').addEventListener('submit', function(e){
+            e.preventDefault();
+            var r0 = document.getElementById('respuesta_0').value;
+            var r1 = document.getElementById('respuesta_1').value;
+            var r2 = document.getElementById('respuesta_2').value;
+            var btn = this.querySelector('button[type="submit"]');
+            btn.disabled = true; btn.textContent = 'Verificando...';
+
+            apiPost({ accion: 'recuperar_paso2', respuestas: [r0, r1, r2] })
+                .then(function(d){
+                    if (d.ok) {
+                        mostrarSolo(document.getElementById('resetPassForm'));
+                        modalWarning('Nueva contraseña',
+                            'Mínimo 8 y máximo 20 caracteres.');
+                    } else {
+                        modalError('Error', d.msg || 'Respuestas incorrectas.');
+                    }
+                    btn.disabled = false; btn.textContent = 'Verificar';
+                })
+                .catch(function(){
+                    modalError('Error', 'No se pudo conectar.');
+                    btn.disabled = false; btn.textContent = 'Verificar';
+                });
+        });
+
+        /* ── SUBMIT NUEVA CONTRASEÑA PASO 3 ── */
+        document.getElementById('formNuevaPass').addEventListener('submit', function(e){
+            e.preventDefault();
+            var nueva   = document.getElementById('nueva_password').value;
+            var repetir = document.getElementById('repetir_password').value;
+            if (nueva !== repetir) { modalError('Error', 'Las contraseñas no coinciden'); return; }
+            if (nueva.length < 8)  { modalError('Error', 'Mínimo 8 caracteres'); return; }
+            var btn = document.getElementById('btnGuardarPass');
+            btn.disabled = true; btn.textContent = 'Guardando...';
+
+            apiPost({ accion: 'restablecer_password', nueva_password: nueva, repetir_password: repetir })
+                .then(function(d){
+                    if (d.ok) {
+                        modalSuccess('¡Listo!', d.msg || 'Contraseña actualizada.', function(){
+                            mostrarSolo(document.getElementById('loginForm'));
+                        });
+                    } else {
+                        modalError('Error', d.msg || 'No se pudo guardar.');
+                        btn.disabled = false; btn.textContent = 'Confirmar';
+                    }
+                })
+                .catch(function(){
+                    modalError('Error', 'No se pudo conectar.');
+                    btn.disabled = false; btn.textContent = 'Confirmar';
+                });
+        });
+
+        /* Medidor fortaleza contraseña */
+        if (typeof initPasswordMatch === 'function') {
+            initPasswordMatch({
+                inputNuevaId:   'nueva_password',
+                inputRepetirId: 'repetir_password',
+                btnGuardarId:   'btnGuardarPass',
+                msgId:          'msg-pass',
+                fillId:         'passStrengthFill2',
+                labelId:        'passStrengthLabel2',
+                maxLen:         20,
+            });
+        }
+    </script>
+</body>
+</html>
