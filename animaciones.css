@@ -1,0 +1,285 @@
+/* ============================================================
+   ANIMACIONES GLOBALES
+   ============================================================ */
+
+/* <--- APARECE ---> */
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* <--- DESVANECE ---> */
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* <--- APARECE DESDE ARRIBA ---> */
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* <--- APARECE DESDE ABAJO ---> */
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(28px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* <--- APARECE DESDE LA IZQUIERDA ---> */
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0);     }
+}
+
+/* <--- APARECE DESDE LA DERECHA ---> */
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* <--- SALIDA CON FADE ---> */
+
+@keyframes fadeOutDown {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(30px); }
+}
+
+/* <--- DESLIZA HACIA ABAJO ---> */
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+}
+
+/* <--- DESLIZA HACIA ARRIBA ---> */
+
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* <--- ZOOM AL ENTRAR ---> */
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* <--- ZOOM AL SALIR ---> */
+
+@keyframes scaleOut {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.9); }
+}
+
+/* <--- REBOTE AL ENTRAR ---> */
+
+@keyframes bounceIn {
+    0%   { opacity: 0; transform: scale(0.3) translateY(-50px); }
+    50%  { opacity: 1; transform: scale(1.05); }
+    70%  {             transform: scale(0.95); }
+    100% {             transform: scale(1); }
+}
+
+/* <--- PULSO ---> */
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.02); }
+}
+
+/* <--- PULSO DE ÉXITO ---> */
+
+@keyframes successPulse {
+    0%, 100% { transform: scale(1); }
+    25%       { transform: scale(1.2); }
+    50%       { transform: scale(1.1); }
+    75%       { transform: scale(1.15); }
+}
+
+/* <--- PULSO DE ANILLO ---> */
+
+@keyframes pulse-ring {
+    0%, 100% { opacity: 0.35; transform: scale(1);    }
+    50%       { opacity: 0.88; transform: scale(1.05); }
+}
+
+/* <--- PULSO DE ANILLO LENTO ---> */
+
+@keyframes pulse-ring-slow {
+    0%, 100% { opacity: 0.18; transform: scale(1);    }
+    50%       { opacity: 0.55; transform: scale(1.08); }
+}
+
+/* <--- SACUDIDA HORIZONTAL ---> */
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25%       { transform: translateX(-5px) rotate(-5deg); }
+    75%       { transform: translateX(5px)  rotate(5deg); }
+}
+
+/* <--- MENEO / WIGGLE ---> */
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25%       { transform: rotate(-10deg); }
+    75%       { transform: rotate(10deg); }
+}
+
+/* <--- FLOTACIÓN SUAVE ---> */
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+}
+
+/* <--- FLOTACIÓN SUTIL ---> */
+
+@keyframes subtleFloat {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50%       { transform: translateY(-5px) translateX(5px); }
+}
+
+/* <--- ROTACIÓN CONTINUA ---> */
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* <--- SPINNER EN BOTONES ---> */
+
+@keyframes spin-icon {
+    to { transform: rotate(360deg); }
+}
+
+/* <--- EXPANDE ANCHO ---> */
+
+@keyframes expandWidth {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+/* <--- EXPANDE ALTO ---> */
+
+@keyframes expandHeight {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+}
+
+/* <--- PARPADEO ---> */
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+/* <--- FLOTACIÓN DE AVATAR ---> */
+
+@keyframes float-avatar {
+    0%, 100% { transform: translateY(0px);  }
+    50%       { transform: translateY(-5px); }
+}
+
+/* <--- REBOTE DE ENTRADA ---> */
+
+@keyframes bounce-in {
+    0%   { transform: scale(0.72); opacity: 0; }
+    60%  { transform: scale(1.06); opacity: 1; }
+    80%  { transform: scale(0.97);             }
+    100% { transform: scale(1);                }
+}
+
+/* <--- ENTRADA DE MODAL ---> */
+
+@keyframes modalIn {
+    0%   { transform: scale(0.80) translateY(24px); opacity: 0; }
+    65%  { transform: scale(1.03) translateY(-4px); opacity: 1; }
+    100% { transform: scale(1)    translateY(0);    opacity: 1; }
+}
+
+/* <--- ENTRADA DE OVERLAY ---> */
+
+@keyframes overlayIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* <--- POP DE GUARDADO ---> */
+
+@keyframes saved-pop {
+    0%   { transform: scale(0.6) translateX(-6px); opacity: 0; }
+    70%  { transform: scale(1.1);                  opacity: 1; }
+    100% { transform: scale(1);                    opacity: 1; }
+}
+
+/* <--- RELLENO DE BARRA DE FUERZA ---> */
+
+@keyframes strength-fill {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+/* <--- RESPIRACIÓN DE ÍCONO DE ENCABEZADO ---> */
+
+@keyframes header-icon-breathe {
+    0%, 100% { box-shadow: 3px 3px 8px rgba(163,177,198,.50), -2px -2px 5px rgba(255,255,255,.80), 0 3px 10px rgba(34,197,94,.26); }
+    50%       { box-shadow: 4px 4px 12px rgba(163,177,198,.60), -3px -3px 8px rgba(255,255,255,.88), 0 5px 18px rgba(34,197,94,.40); }
+}
+
+/* <--- ENTRADA DE BLOQUE DE PREGUNTA ---> */
+
+@keyframes preg-block-enter {
+    from { opacity: 0; transform: translateX(16px); }
+    to   { opacity: 1; transform: translateX(0);    }
+}
+
+/* <--- CONTEO DE ESTADÍSTICA ---> */
+
+@keyframes stat-count-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* <--- DANZA DE BORDE ---> */
+
+@keyframes border-dance {
+    0%, 100% { border-color: rgba(34,197,94,.30); }
+    50%       { border-color: rgba(34,197,94,.65); }
+}
+
+/* <--- REBOTE SCROLL INDICATOR ---> */
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* CORRECCIÓN: Se añade slideInRight que era referenciado en style_componentes.css
+   pero no existía en este archivo — causaba animación silenciosa (ningún efecto visible). */
+
+/* <--- DESLIZA DESDE LA DERECHA ---> */
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* CORRECCIÓN: Se añade modalBounceIn que era referenciado en style_componentes.css
+   apuntando a un @keyframes inexistente. Se define como alias de modalIn. */
+
+/* <--- REBOTE DE MODAL (alias de modalIn) ---> */
+
+@keyframes modalBounceIn {
+    0%   { transform: scale(0.80) translateY(24px); opacity: 0; }
+    65%  { transform: scale(1.03) translateY(-4px); opacity: 1; }
+    100% { transform: scale(1)    translateY(0);    opacity: 1; }
+}
