@@ -81,7 +81,7 @@
             var icon = card.querySelector('.feature-icon');
             if (!icon) return;
             card.addEventListener('mouseenter', function () {
-                icon.style.animation = 'bounce-in 0.5s ease both';
+                icon.style.animation = 'float-avatar 1.8s ease-in-out infinite';
             });
             card.addEventListener('mouseleave', function () {
                 icon.style.animation = '';
