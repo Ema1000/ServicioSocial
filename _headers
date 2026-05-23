@@ -7,11 +7,40 @@
 
   Content-Security-Policy:
     default-src 'self';
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https:;
-    style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https:;
-    img-src 'self' data: blob: https:;
-    font-src 'self' data: https://cdn.jsdelivr.net https:;
-    connect-src 'self' https:;
-    media-src 'self' https:;
+    
+    script-src
+      'self';
+
+    style-src
+      'self'
+      'unsafe-inline'
+      https://cdn.jsdelivr.net;
+
+    font-src
+      'self'
+      https://cdn.jsdelivr.net
+      data:;
+
+    img-src
+      'self'
+      data:
+      blob:;
+
+    connect-src
+      'self';
+
+    media-src
+      'self';
+
     object-src 'none';
+
     frame-ancestors 'self';
+
+    base-uri 'self';
+
+    form-action 'self';
+
+    upgrade-insecure-requests;
+
+    block-all-mixed-content;
+*/
