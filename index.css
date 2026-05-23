@@ -15,7 +15,7 @@
             html { scroll-behavior: smooth; }
         }
 
-        /* <--- SKIP TO CONTENT ---> */
+/* <--- SKIP TO CONTENT ---> */
         .skip-to-content {
             position: absolute;
             top: -40px;
@@ -34,7 +34,9 @@
             top: 0;
         }
 
-        /* <--- HEADER ---> */
+        /* =============================================
+        Menu:  Logo - Inicio - Servicio Social - Requisitos - Acceso
+        ============================================= */
         .header-index {
             position: fixed;
             top: 0;
@@ -88,7 +90,10 @@
             outline: none;
         }
 
-        /* <--- HERO ---> */
+        /* =============================================
+         Portada: Servicio Social - El servicio social es una oportunidad para aplicar....
+        ============================================= */
+        
         .hero {
             min-height: 100vh;
             display: flex;
@@ -149,7 +154,10 @@
             opacity: 0.7;
         }
 
-        /* <--- SECCIONES GENERALES ---> */
+        /* =============================================
+        Secciones: ¿Qué es el Servicio Social? - Requisitos de Servicio Social - Acceso al Sistema - 
+        ============================================= */
+        
         section {
             padding: 6rem 0;
         }
@@ -175,7 +183,10 @@
             margin: 0 auto 4rem;
         }
 
-        /* <--- ABOUT / SERVICIO SOCIAL ---> */
+        /* =============================================
+        Compromiso con la Comunidad
+        ============================================= */
+        
         .about {
             background: #f0fdf4;
         }
@@ -205,7 +216,10 @@
             gap: 1.5rem;
         }
 
-        /* <--- CARDS ---> */
+        /* =============================================
+        Experiencia Práctica - Impacto Social - Crecimiento Profesional - Instituciones
+        ============================================= */
+
         .feature-card {
             background: white;
             padding: 2rem;
@@ -239,7 +253,10 @@
             color: #ffffff;
         }
 
-        /* <--- REQUISITOS ---> */
+        /* =============================================
+        REQUISITOS
+        ============================================= */
+        
         .requirements {
             background: white;
         }
@@ -295,7 +312,10 @@
             line-height: 1.6;
         }
 
-        /* <--- LOGIN / ACCESO AL SISTEMA ---> */
+        /* =============================================
+        Login: Administrador - Personal - Estudiantes
+        ============================================= */
+        
         .login-section {
             background: #f0fdf4;
             padding: 6rem 0;
@@ -389,7 +409,10 @@
         .login-card.loading .login-btn .btn-spinner { display: block; }
         .login-card.loading .login-btn .btn-text    { opacity: 0.75; }
 
-        /* <--- BOTÓN VOLVER ARRIBA ---> */
+        /* =============================================
+        Flecha: Boton volver Arriba 
+        ============================================= */
+        
         .back-to-top {
             position: fixed;
             bottom: 2rem;
@@ -428,7 +451,10 @@
             outline-offset: 3px;
         }
 
-        /* <--- FOOTER ---> */
+        /* =============================================
+        Parte Inferior: Instituto Tecnológico Superior de Santiago Tuxtla - Contacto - Enlaces Rápido - Horarios de Atención 
+        ============================================= */
+        
         .footer {
             background: #15803d;
             color: white;
@@ -487,6 +513,7 @@
         }
 
         /* <--- SOCIAL LINK ICON ---> */
+        
         .social-link {
             width: 40px;
             height: 40px;
